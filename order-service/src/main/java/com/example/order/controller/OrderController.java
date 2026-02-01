@@ -27,15 +27,15 @@ public class OrderController {
 
         return ResponseEntity.ok("Order Created");
     }
-    @GetMapping("/confirm?{productId}")
-    public ResponseEntity<?> confirmOrder(@PathVariable String productId){
-        orderService.confirmOrder(productId);
+    @GetMapping("/confirm/{orderId}")
+    public ResponseEntity<?> confirmOrder(@PathVariable String orderId){
+        orderService.confirmOrder(orderId);
         return ResponseEntity.ok("Order Confirmed");
     }
 
-    @GetMapping("/cancel?{productId}")
-    public ResponseEntity<?> cancelOrder(@PathVariable String productId){
-        orderService.cancelOrder(productId);
+    @GetMapping("/cancel/{orderId}")
+    public ResponseEntity<?> cancelOrder(@PathVariable String orderId){
+        orderService.cancelOrder(orderId);
         return ResponseEntity.ok("Order cancelled");
     }
 

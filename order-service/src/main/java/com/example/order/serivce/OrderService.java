@@ -3,6 +3,7 @@ package com.example.order.serivce;
 import com.example.order.dto.OrderRecord;
 import com.example.order.entity.Order;
 import com.example.order.enums.OrderStatus;
+import com.example.order.proxy.InventoryServiceProxy;
 import com.example.order.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +20,13 @@ public class OrderService {
 
     OrderRepository orderRepository;
     private static final String INVENTORY_SERVICE="http://localhost:8085/inventory";
+    InventoryServiceProxy inventoryServiceProxy;
 
     @Autowired
     private RestTemplate restTemplate;
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, InventoryServiceProxy inventoryServiceProxy) {
         this.orderRepository = orderRepository;
+        this.inventoryServiceProxy = inventoryServiceProxy;
     }
 
     public ResponseEntity<?> createOrder(OrderRecord orderdRecord){
@@ -36,26 +39,30 @@ public class OrderService {
                 LocalDateTime.now()
         );
         orderRepository.save(order);
-        //call the inventory-service
+        //call the inventory-service reserved
         Map<String, Object> inventoryRequest = new HashMap<>();
         inventoryRequest.put("productId", order.getProductId());
         inventoryRequest.put("quantity",order.getQuantity());
-        String response =  restTemplate.postForObject(INVENTORY_SERVICE.concat("/add"),inventoryRequest, String.class);
-        System.out.println("Inventory Service Response :"+response);
+        //String response =  restTemplate.postForObject(INVENTORY_SERVICE.concat("/add"),inventoryRequest, String.class);
+         ResponseEntity<String>response = inventoryServiceProxy.reserveInventory(inventoryRequest);
+        System.out.println("Inventory Service Response :"+response.getBody());
         return ResponseEntity.ok(response);
     }
     public void confirmOrder(String orderId){
         Order order = orderRepository.findByOrderId(orderId);
 
 
-        //CALL THE inventory-service
+        //CALL THE inventory-service deduct
         Map<String, Object> inventoryRequest = new HashMap<>();
         inventoryRequest.put("productId", order.getProductId());
         inventoryRequest.put("quantity",order.getQuantity());
-        restTemplate.postForObject(INVENTORY_SERVICE.concat("/reserve"),inventoryRequest, Void.class);
+        //restTemplate.postForObject(INVENTORY_SERVICE.concat("/reserve"),inventoryRequest, Void.class);
 
-        order.setStatus(OrderStatus.CONFIRMED);
-        orderRepository.save(order);
+        ResponseEntity<String> response = inventoryServiceProxy.deductInventory(inventoryRequest);
+        if(response.getStatusCode().is2xxSuccessful()){
+            order.setStatus(OrderStatus.CONFIRMED);
+            orderRepository.save(order);
+        }
 
 
     }

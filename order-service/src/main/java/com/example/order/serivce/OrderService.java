@@ -29,6 +29,9 @@ public class OrderService {
         this.inventoryServiceProxy = inventoryServiceProxy;
     }
 
+    /* If Order is created then order quantity will be deducted from inventory available_quantity
+            and deducted inventory will be stored to reserved_quantity
+    */
     public ResponseEntity<?> createOrder(OrderRecord orderdRecord){
         Order order = new Order(
                 UUID.randomUUID().toString(),
@@ -48,36 +51,36 @@ public class OrderService {
         System.out.println("Inventory Service Response :"+response.getBody());
         return ResponseEntity.ok(response);
     }
+    /* If order is confirmed then Inventory will be deducted from available_quantity
+        & reserved_quantity will set to zero */
     public void confirmOrder(String orderId){
         Order order = orderRepository.findByOrderId(orderId);
-
-
         //CALL THE inventory-service deduct
         Map<String, Object> inventoryRequest = new HashMap<>();
         inventoryRequest.put("productId", order.getProductId());
         inventoryRequest.put("quantity",order.getQuantity());
         //restTemplate.postForObject(INVENTORY_SERVICE.concat("/reserve"),inventoryRequest, Void.class);
-
-        ResponseEntity<String> response = inventoryServiceProxy.deductInventory(inventoryRequest);
+        ResponseEntity<String> response = inventoryServiceProxy.confirmInventory(inventoryRequest);
         if(response.getStatusCode().is2xxSuccessful()){
             order.setStatus(OrderStatus.CONFIRMED);
             orderRepository.save(order);
         }
-
-
     }
 
+    /* If Order is cancelled then inventory will be released */
     public void cancelOrder(String productId){
         Order order = orderRepository.findByOrderId(productId);
-
         //CALL THE inventory-service to cancelled the order
         Map<String, Object> inventoryRequest = new HashMap<>();
         inventoryRequest.put("productId", order.getProductId());
         inventoryRequest.put("quantity",order.getQuantity());
-        restTemplate.postForObject(INVENTORY_SERVICE.concat("/relese"),inventoryRequest, Void.class);
-
-        order.setStatus(OrderStatus.CANCELLED);
-        orderRepository.save(order);
+        //restTemplate.postForObject(INVENTORY_SERVICE.concat("/relese"),inventoryRequest, Void.class);
+        ResponseEntity<String> response = inventoryServiceProxy.cancelInventory(inventoryRequest);
+        System.out.println("cancel order response :"+response);
+        if(response.getStatusCode().is2xxSuccessful()){
+            order.setStatus(OrderStatus.CANCELLED);
+            orderRepository.save(order);
+        }
 
     }
 }

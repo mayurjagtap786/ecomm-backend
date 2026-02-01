@@ -29,21 +29,18 @@ public class InventoryController {
 
     @PostMapping("/reserve")
     public ResponseEntity<Object> reserveInventory(@RequestBody InventoryRequest inventoryRequest){
-
         inventoryService.reservedStock(inventoryRequest);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Stock Reserved");
     }
 
-    @PostMapping("/release")
-    public ResponseEntity<String> release(@RequestBody InventoryRequest inventoryRequest) {
-        inventoryService.releaseStock(inventoryRequest);
-        return ResponseEntity.ok("Stock released");
+    @PostMapping("/cancel")
+    public ResponseEntity<?> release(@RequestBody InventoryRequest inventoryRequest) {
+        return inventoryService.releaseStock(inventoryRequest);
+
     }
 
-
-    @PostMapping("/deduct")
-    public ResponseEntity<String> deduct(@RequestBody InventoryRequest inventoryRequest) {
-        inventoryService.deductStock(inventoryRequest);
-        return ResponseEntity.ok("Stock deducted");
+    @PostMapping("/confirm")
+    public ResponseEntity<?> deduct(@RequestBody InventoryRequest inventoryRequest) {
+        return inventoryService.confirmStock(inventoryRequest);
     }
 }

@@ -5,6 +5,8 @@ import org.shopping.kart.inventory.exception.InsufficientStockException;
 import org.shopping.kart.inventory.exception.InventoryNotFound;
 import org.shopping.kart.inventory.model.Inventory;
 import org.shopping.kart.inventory.repository.InventoryRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,7 +38,7 @@ public class InventoryService {
 
     public void reservedStock(InventoryRequest request){
         Inventory inventory = getInventory(request.productId());
-        if(inventory.getAvailableQty() <= request.quantity()){
+        if(inventory.getAvailableQty() < request.quantity()){
             throw new InsufficientStockException(request.productId());
         }
         inventory.setAvailableQty(inventory.getAvailableQty() - request.quantity());
@@ -44,19 +46,25 @@ public class InventoryService {
         repository.save(inventory);
     }
 
-    public void releaseStock(InventoryRequest request){
+    public ResponseEntity<?> releaseStock(InventoryRequest request){
         Inventory inventory = getInventory(request.productId());
-        inventory.setReservedQty(inventory.getReservedQty() - request.quantity());
+        if (inventory.getReservedQty()!=null && inventory.getReservedQty() > 0) {
         inventory.setAvailableQty(inventory.getAvailableQty() + request.quantity());
+        inventory.setReservedQty(inventory.getReservedQty() - request.quantity());
         repository.save(inventory);
+        return ResponseEntity.ok("Inventory has been cancelled...");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
-    public void deductStock(InventoryRequest request){
+    public ResponseEntity<?> confirmStock(InventoryRequest request){
         Inventory inventory = getInventory(request.productId());
             if(inventory.getReservedQty() < request.quantity()){
                 throw new RuntimeException("Insufficient reserved stock");
             }
             inventory.setReservedQty(inventory.getReservedQty() - request.quantity());
             repository.save(inventory);
+            return ResponseEntity.ok("Inventory Confirmed...");
     }
 }

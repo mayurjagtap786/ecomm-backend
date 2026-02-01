@@ -34,6 +34,8 @@ public class Order {
         this.status = status;
     }
 
+    public Order(){}
+
     public Order(String orderId, String productId, Integer quantity, OrderStatus status, Double amount, LocalDateTime createdAt) {
 
         this.orderId = orderId;

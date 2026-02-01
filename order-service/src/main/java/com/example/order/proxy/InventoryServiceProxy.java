@@ -13,8 +13,11 @@ public interface InventoryServiceProxy {
     @PostMapping("/inventory/reserve")
     public ResponseEntity<String> reserveInventory(Map<String,Object> inventoryMap);
 
-    @PostMapping("/inventory/deduct")
-    public ResponseEntity<String> deductInventory(Map<String,Object> inventoryMap);
+    @PostMapping("/inventory/confirm")
+    public ResponseEntity<String> confirmInventory(Map<String,Object> inventoryMap);
+
+    @PostMapping("/inventory/cancel")
+    public ResponseEntity<String> cancelInventory(Map<String,Object> inventorymap);
 
 
 }

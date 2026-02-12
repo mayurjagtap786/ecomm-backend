@@ -48,7 +48,7 @@ public class OrderService {
         inventoryRequest.put("quantity",order.getQuantity());
         //String response =  restTemplate.postForObject(INVENTORY_SERVICE.concat("/add"),inventoryRequest, String.class);
          ResponseEntity<String>response = inventoryServiceProxy.reserveInventory(inventoryRequest);
-        System.out.println("Inventory Service Response :"+response.getBody());
+        System.out.println("Inventory Service Response while creating order :"+response.getBody());
         return ResponseEntity.ok(response);
     }
     /* If order is confirmed then Inventory will be deducted from available_quantity
@@ -61,6 +61,7 @@ public class OrderService {
         inventoryRequest.put("quantity",order.getQuantity());
         //restTemplate.postForObject(INVENTORY_SERVICE.concat("/reserve"),inventoryRequest, Void.class);
         ResponseEntity<String> response = inventoryServiceProxy.confirmInventory(inventoryRequest);
+        System.out.println("Inventory Service Response :"+response.getBody());
         if(response.getStatusCode().is2xxSuccessful()){
             order.setStatus(OrderStatus.CONFIRMED);
             orderRepository.save(order);

@@ -23,9 +23,9 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<?>createOrder(@RequestBody OrderRecord orderRecord){
-        orderService.createOrder(orderRecord);
+       ResponseEntity<?> response =  orderService.createOrder(orderRecord);
 
-        return ResponseEntity.ok("Order Created");
+        return ResponseEntity.ok("Order Created "+response.getBody());
     }
     @GetMapping("/confirm/{orderId}")
     public ResponseEntity<?> confirmOrder(@PathVariable String orderId){
@@ -38,5 +38,4 @@ public class OrderController {
         orderService.cancelOrder(orderId);
         return ResponseEntity.ok("Order cancelled");
     }
-
 }

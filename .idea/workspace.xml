@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dfeb1470-8b98-406c-ba89-b39c198c1f0e" name="Changes" comment="refactor the code of order service and inventory service">
+      <change afterPath="$PROJECT_DIR$/inventory-servcie/src/main/resources/InsufficientStockException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-servcie/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-servcie/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-servcie/src/main/java/org/shopping/kart/inventory/InventoryServcieApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-servcie/src/main/java/org/shopping/kart/inventory/InventoryServcieApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-servcie/src/main/java/org/shopping/kart/inventory/controller/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-servcie/src/main/java/org/shopping/kart/inventory/controller/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-servcie/src/main/java/org/shopping/kart/inventory/service/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-servcie/src/main/java/org/shopping/kart/inventory/service/InventoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-servcie/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-servcie/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order/config/FeignClientException.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order/config/FeignClientConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order/proxy/InventoryServiceProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order/proxy/InventoryServiceProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/example/order/serivce/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/example/order/serivce/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;mayurjagtap786&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mayurjagtap786/ecomm-backend.git&quot;,
+    &quot;accountId&quot;: &quot;7402bf1a-0b80-4ae5-a53f-e38ca9989a2e&quot;
+  }
+}</component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="390aFYxdBFkWNcf7F1yJ41bURRC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.EurekaServiceDiscoveryApplication.executor": "Run",
+    "Application.InventoryServcie2.executor": "Run",
+    "Application.InventoryServcieApplication.executor": "Run",
+    "Application.OrderServiceApplication.executor": "Run",
+    "Maven.inventory-servcie [clean].executor": "Run",
+    "Maven.inventory-servcie [install].executor": "Run",
+    "Maven.order-service [clean].executor": "Run",
+    "Maven.order-service [install].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "order-service-v1.0",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "H:/project_workspace/ecomm-backend",
+    "onboarding.tips.debug.path": "H:/project_workspace/ecomm-backend/order-service/src/main/java/org/example/order/service/Main.java",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="H:\project_workspace\ecomm-backend\order-service\src\main\java\org\example\order\service" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.InventoryServcie2">
+    <configuration name="EurekaServiceDiscoveryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.eureka_service_discovery.EurekaServiceDiscoveryApplication" />
+      <module name="eureka-service-discovery" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.eureka_service_discovery.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InventoryServcie2" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="org.shopping.kart.inventory.InventoryServcieApplication" />
+      <module name="inventory-servcie" />
+      <option name="VM_PARAMETERS" value="-Duser.timezone=Asia/Kolkata -Dserver.port=8086" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.shopping.kart.inventory.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InventoryServcieApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.shopping.kart.inventory.InventoryServcieApplication" />
+      <module name="inventory-servcie" />
+      <option name="VM_PARAMETERS" value="-Duser.timezone=Asia/Kolkata" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.shopping.kart.inventory.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.order.OrderServiceApplication" />
+      <module name="order-service" />
+      <option name="VM_PARAMETERS" value="-Duser.timezone=Asia/Kolkata" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.order.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.InventoryServcieApplication" />
+      <item itemvalue="Application.InventoryServcie2" />
+      <item itemvalue="Application.EurekaServiceDiscoveryApplication" />
+      <item itemvalue="Application.OrderServiceApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.OrderServiceApplication" />
+        <item itemvalue="Application.EurekaServiceDiscoveryApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dfeb1470-8b98-406c-ba89-b39c198c1f0e" name="Changes" comment="" />
+      <created>1769835338735</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1769835338735</updated>
+    </task>
+    <task id="LOCAL-00001" summary="added the order service">
+      <option name="closed" value="true" />
+      <created>1769882495792</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1769882495792</updated>
+    </task>
+    <task id="LOCAL-00002" summary="refactor the code of order service and inventory service">
+      <option name="closed" value="true" />
+      <created>1769967783038</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1769967783038</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added the order service" />
+    <MESSAGE value="refactor the code of order service and inventory service" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor the code of order service and inventory service" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/order-service/src/main/java/org/example/order/service/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/inventory-servcie/src/main/java/org/shopping/kart/inventory/service/InventoryService.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/order-service/src/main/java/com/example/order/serivce/OrderService.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/order-service/src/main/java/com/example/order/serivce/OrderService.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/order-service/src/main/java/com/example/order/serivce/OrderService.java</url>
+          <line>71</line>
+          <properties class="com.example.order.serivce.OrderService" method="cancelOrder">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

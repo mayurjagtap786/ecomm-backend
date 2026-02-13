@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -27,6 +28,11 @@ public class OrderService {
     public OrderService(OrderRepository orderRepository, InventoryServiceProxy inventoryServiceProxy) {
         this.orderRepository = orderRepository;
         this.inventoryServiceProxy = inventoryServiceProxy;
+    }
+    
+    
+    public List<Order> getAllOrders(){
+        return orderRepository.findAll();
     }
 
     /* If Order is created then order quantity will be deducted from inventory available_quantity

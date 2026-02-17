@@ -39,15 +39,17 @@ public class InventoryService {
         return inventory.getAvailableQty() >= quantity;
     }
 
-    public void reservedStock(InventoryRequest request){
-        Inventory inventory = getInventory(request.productId());
-        if(inventory.getAvailableQty() < request.quantity()){
-            throw new InsufficientStockException(request.productId());
+
+        public void reservedStock(InventoryRequest request){
+            Inventory inventory = getInventory(request.productId());
+            if(inventory.getAvailableQty() < request.quantity()){
+                throw new InsufficientStockException(request.productId());
+            }
+            inventory.setAvailableQty(inventory.getAvailableQty() - request.quantity());
+            inventory.setReservedQty(request.quantity());
+            repository.save(inventory);
         }
-        inventory.setAvailableQty(inventory.getAvailableQty() - request.quantity());
-        inventory.setReservedQty(request.quantity());
-        repository.save(inventory);
-    }
+
 
     public ResponseEntity<?> releaseStock(InventoryRequest request){
         Inventory inventory = getInventory(request.productId());

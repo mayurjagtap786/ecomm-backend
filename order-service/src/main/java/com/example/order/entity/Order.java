@@ -2,17 +2,19 @@ package com.example.order.entity;
 
 import com.example.order.enums.OrderStatus;
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Order extends BaseEntity{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO,generator="native")
     private Long id;
+
     private String orderId;
 
     @Column(unique = true)
@@ -24,7 +26,6 @@ public class Order {
     private OrderStatus status;
 
     private Double amount;
-    private LocalDateTime createdAt;
 
     public OrderStatus getStatus() {
         return status;
@@ -43,7 +44,6 @@ public class Order {
         this.quantity = quantity;
         this.status = status;
         this.amount = amount;
-        this.createdAt = createdAt;
     }
 
     public Long getId() {
@@ -87,13 +87,6 @@ public class Order {
         this.amount = amount;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
 
     @Override
     public String toString() {
@@ -104,7 +97,6 @@ public class Order {
                 ", quantity=" + quantity +
                 ", status=" + status +
                 ", amount=" + amount +
-                ", createdAt=" + createdAt +
                 '}';
     }
 

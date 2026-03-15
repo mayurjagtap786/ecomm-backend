@@ -1,9 +1,15 @@
 package com.example.order.controller;
 
+import com.example.order.constants.OrderConstants;
 import com.example.order.dto.OrderRecord;
+import com.example.order.dto.OrderServiceContactInfo;
+import com.example.order.dto.ResponseDTO;
 import com.example.order.entity.Order;
 import com.example.order.serivce.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -20,6 +26,15 @@ public class OrderController {
     @Autowired
     RestTemplate restTemplate;
 
+    @Value("${build.version}")
+    private String buildVersion;
+
+    @Autowired
+    private Environment environment;
+
+    @Autowired
+    private OrderServiceContactInfo orderServiceContactInfo;
+
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
@@ -32,7 +47,11 @@ public class OrderController {
     public ResponseEntity<?>createOrder(@RequestBody OrderRecord orderRecord){
        ResponseEntity<?> response =  orderService.createOrder(orderRecord);
 
-        return ResponseEntity.ok("Order Created "+response.getBody());
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(
+                        new ResponseDTO(String.valueOf(HttpStatus.CREATED),
+                                OrderConstants.MESSAGE_201)
+                );
     }
     @GetMapping("/confirm/{orderId}")
     public ResponseEntity<?> confirmOrder(@PathVariable String orderId){
@@ -45,5 +64,33 @@ public class OrderController {
     public ResponseEntity<?> cancelOrder(@PathVariable String orderId){
         orderService.cancelOrder(orderId);
         return ResponseEntity.ok("Order cancelled");
+    }
+
+
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo(){
+
+        return  ResponseEntity
+                .status(HttpStatus.OK)
+                .body(buildVersion);
+
+    }
+
+    @GetMapping("/java-version")
+    public ResponseEntity<String> getJavaVersion(){
+
+        return  ResponseEntity
+                .status(HttpStatus.OK)
+                .body(environment.getProperty("JAVA_HOME"));
+
+    }
+
+    @GetMapping("/contact-info")
+    public ResponseEntity<OrderServiceContactInfo> getContactInfo(){
+
+        return  ResponseEntity
+                .status(HttpStatus.OK)
+                .body(orderServiceContactInfo);
+
     }
 }

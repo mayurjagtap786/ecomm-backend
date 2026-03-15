@@ -1,6 +1,6 @@
 package com.example.order.dto;
 
-public record OrderRecord(String productId, int quantity,Double amount) {}
+public record OrderRecord(String productId, Integer quantity,Double amount) {}
 
     /*private String productId;
     private int quantity;

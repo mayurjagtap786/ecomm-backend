@@ -3,6 +3,7 @@ package com.example.order.serivce;
 import com.example.order.dto.OrderRecord;
 import com.example.order.entity.Order;
 import com.example.order.enums.OrderStatus;
+import com.example.order.mapper.OrderMapper;
 import com.example.order.proxy.InventoryServiceProxy;
 import com.example.order.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +40,7 @@ public class OrderService {
             and deducted inventory will be stored to reserved_quantity
     */
     public ResponseEntity<?> createOrder(OrderRecord orderdRecord){
-        Order order = new Order(
-                UUID.randomUUID().toString(),
-                orderdRecord.productId(),
-                orderdRecord.quantity(),
-                OrderStatus.CREATED,
-                orderdRecord.amount(),
-                LocalDateTime.now()
-        );
+        Order order = OrderMapper.orderRecordToOrderEntity(orderdRecord, new Order());
         orderRepository.save(order);
         //call the inventory-service reserved
         Map<String, Object> inventoryRequest = new HashMap<>();

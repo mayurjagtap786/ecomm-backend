@@ -1,9 +1,11 @@
 package org.shopping.kart.inventory.controller;
 
+import org.shopping.kart.inventory.dto.InventoryContactInfoDTO;
 import org.shopping.kart.inventory.dto.InventoryRequest;
 import org.shopping.kart.inventory.model.Inventory;
 import org.shopping.kart.inventory.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,12 @@ public class InventoryController {
     private InventoryService inventoryService;
     @Autowired
     private Environment environment;
+
+    @Autowired
+    private InventoryContactInfoDTO inventoryContactInfoDTO;
+
+    @Value("${build.version}")
+    private String buildVersion;
 
     @PostMapping("/add")
     public ResponseEntity<String> addInventory(@RequestBody InventoryRequest inventoryRequest){
@@ -44,5 +52,19 @@ public class InventoryController {
     @PostMapping("/confirm")
     public ResponseEntity<?> deduct(@RequestBody InventoryRequest inventoryRequest) {
         return inventoryService.confirmStock(inventoryRequest);
+    }
+
+    @GetMapping("/build-info")
+    public ResponseEntity<String> buildInfo(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(buildVersion);
+    }
+
+    @GetMapping("/contact-info")
+    public ResponseEntity<?> contactInfo(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(inventoryContactInfoDTO);
     }
 }

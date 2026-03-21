@@ -1,0 +1,11 @@
+build:
+  version: "2.0"
+
+inventory:
+  message: "Welcome to PROD environment inventory-service of ecomm application"
+  contactDetails:
+    name: "Linda Mack - PROD Lead"
+    email: "prodsupport@ecomm.com"
+  onCallSupport:
+    - (256)256-7541
+    - (456)456-3254

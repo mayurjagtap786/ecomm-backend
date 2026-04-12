@@ -2,7 +2,7 @@ server:
   port: 8088
 spring:
   application:
-    name: order-service
+    name: order
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost:5432}/mars
     username: ${DB_USER:postgres}
@@ -14,25 +14,14 @@ spring:
     show-sql: true
     properties:
       dialect: org.hibernate.dialect.PostgreSQLDialect
-  profiles:
-    active:
-      - qa
-
-build:
-  version: "1.0"
-
-order:
-  message: "Welcome to order-service of ecomm application"
-  contactDetails:
-    name: "Mayur Jagtap"
-    email: "support@ecomm.com"
-  onCallSupport:
-    - (555)555-1234
-    - (666)666-9874
+  #profiles:
+   # active: "prod"
+  #config:
+   # import: "optional:configserver:http://localhost:8888/"
 #spring.jpa.properties.hibernate.jdbc.time_zone= Asia/Kolkata
 
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: *
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -5,7 +5,6 @@ import org.shopping.kart.inventory.exception.InsufficientStockException;
 import org.shopping.kart.inventory.exception.InventoryNotFound;
 import org.shopping.kart.inventory.model.Inventory;
 import org.shopping.kart.inventory.repository.InventoryRepository;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

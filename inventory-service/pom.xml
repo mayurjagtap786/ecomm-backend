@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.shopping.kart.inventory</groupId>
-	<artifactId>inventory-servcie</artifactId>
+	<artifactId>inventory-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>inventory-service</name>
 	<description>Demo project for Spring Boot</description>
@@ -95,7 +95,7 @@
             <version>3.5.1</version>
             <configuration>
                 <to>
-                    <image>${project.artifactId}:v1</image>
+                    <image>mayurjagtap/${project.artifactId}:v1</image>
                 </to>
             </configuration>
         </plugin>

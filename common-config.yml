@@ -1,0 +1,23 @@
+services:
+  network-deploy-service:
+    networks:
+     - ecomm
+  microservice-base-config:
+    extends:
+      service: network-deploy-service
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+  microservice-configserver-config:
+    extends:
+      service: microservice-base-config
+    depends_on:
+      configservice:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_CONFIG_IMPORT: "configserver:http://configservice:8888/"
+      SPRING_DATASOURCE_USERNAME: "postgres"
+      SPRING_DATASOURCE_PASSWORD: "root"
+

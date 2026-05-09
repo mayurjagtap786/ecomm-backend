@@ -1,21 +1,11 @@
 services:
-  eureka-server:
-    image: "mayurjagtap/eureka-service-discovery:v1"
-    container_name: "eureka-ms"
-    ports:
-      - "8761:8761"
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    extends:
-      file: common-config.yml
-      service: network-deploy-service 
-  configservice:
+  configserver:
     image: "mayurjagtap/config-service:v1"
     container_name: config-ms
     ports:
       - "8888:8888"
+    environment:
+      SPRING_APPLICATION_NAME: "configserver"
     healthcheck:
       test: "curl --fail --silent localhost:8888/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
@@ -25,6 +15,24 @@ services:
     extends:
       file: common-config.yml
       service: microservice-base-config
+
+  eurekaserver:
+    image: "mayurjagtap/eureka-service-discovery:v1"
+    container_name: "eureka-ms"
+    ports:
+      - "8761:8761"
+    environment:
+      SPRING_APPLICATION_NAME: "eurekaserver"
+    healthcheck:
+      test: "curl --fail --silent localhost:8761/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+
   orderdb:
     image: "postgres:16"
     container_name: "orderdb"
@@ -45,17 +53,20 @@ services:
     extends:
       file: common-config.yml
       service: network-deploy-service
+
   order:
     image: "mayurjagtap/order-service:v1"
     container_name: order-ms
     ports:
       - "8088:8088"
     environment:
-      SPRING_APPLICATION_NAME: "order"
+      SPRING_APPLICATION_NAME: "orderservice"
       SPRING_DATASOURCE_URL: "jdbc:postgresql://orderdb:5432/mars"
+      
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
+
   inventorydb:
     image: "postgres:16"
     container_name: "inventorydb"
@@ -73,19 +84,22 @@ services:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "root"
       POSTGRES_DB: "aqua"
-    networks:
-      - ecomm
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
   inventory:
     image: "mayurjagtap/inventory-service:v1"
     container_name: inventory-ms
     ports:
       - "8085:8085"
     environment:
-      SPRING_APPLICATION_NAME: "inventory"
-      SPRING_DATASOURCE_URL: "jdbc:postgresql://inventorydb:5433/aqua"
+      SPRING_APPLICATION_NAME: "inventoryservice"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://inventorydb:5432/aqua"
+      
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
       
 networks:
   ecomm:

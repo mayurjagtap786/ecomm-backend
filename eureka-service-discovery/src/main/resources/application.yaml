@@ -1,6 +1,8 @@
 spring:
   application:
-    name: eureka-service-discovery
+    name: eurekaserver
+  config:
+    import: "optional:configserver:http://localhost:8888/"
 server:
   port: 8761
 #Eureka server sholud not register itself
@@ -8,4 +10,18 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
 

@@ -18,10 +18,30 @@ spring:
   profiles:
     active: "prod"
   config:
-    import: "optional:configserver:http://localhost:8888"
+   import: "optional:configserver:http://localhost:8888"
 #spring.jpa.properties.hibernate.jdbc.time_zone= Asia/Kolkata
 management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: "*"
+  endpoint:
+    shutdown:
+      access: UNRESTRICTED
+  info:
+    env:
+      enabled: true
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+info:
+  app:
+    name: "inventoryservice"
+    description: "Ecomm App Inventory Service"
+    version: "1.0.0"

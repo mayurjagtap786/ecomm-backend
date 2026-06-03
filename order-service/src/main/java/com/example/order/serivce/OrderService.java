@@ -1,5 +1,6 @@
 package com.example.order.serivce;
 
+import com.example.order.dto.OrderDTO;
 import com.example.order.dto.OrderRecord;
 import com.example.order.entity.Order;
 import com.example.order.enums.OrderStatus;
@@ -12,10 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -32,8 +30,15 @@ public class OrderService {
     }
     
     
-    public List<Order> getAllOrders(){
-        return orderRepository.findAll();
+    public List<OrderDTO> getAllOrders(){
+
+        List<Order> orders =  orderRepository.findAll();
+        List<OrderDTO> orderList = new ArrayList<OrderDTO>();
+        for (Order order: orders){
+
+            orderList.add(new OrderDTO(order.getOrderId(),order.getProductId(),order.getQuantity(),order.getAmount(),order.getStatus()));
+        }
+        return orderList;
     }
 
     /* If Order is created then order quantity will be deducted from inventory available_quantity

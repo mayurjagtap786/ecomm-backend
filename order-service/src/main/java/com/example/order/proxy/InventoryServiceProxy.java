@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Map;
 
-@FeignClient(name = "inventory-service" , configuration = FeignClientConfiguration.class)
+@FeignClient(name = "inventoryservice" , configuration = FeignClientConfiguration.class)
 public interface InventoryServiceProxy {
 
     @PostMapping("/inventory/reserve")

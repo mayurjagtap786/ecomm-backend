@@ -15,9 +15,10 @@ public class Order extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.AUTO,generator="native")
     private Long id;
 
+    @Column(unique = true)
     private String orderId;
 
-    @Column(unique = true)
+
     private String productId;
 
     private Integer quantity;

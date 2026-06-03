@@ -1,6 +1,7 @@
 package com.example.order.controller;
 
 import com.example.order.constants.OrderConstants;
+import com.example.order.dto.OrderDTO;
 import com.example.order.dto.OrderRecord;
 import com.example.order.dto.OrderServiceContactInfo;
 import com.example.order.dto.ResponseDTO;
@@ -40,7 +41,7 @@ public class OrderController {
     }
 
     @GetMapping("/fetch")
-    public List<Order> getAllOrders(){
+    public List<OrderDTO> getAllOrders(){
         return orderService.getAllOrders();
     }
     @PostMapping

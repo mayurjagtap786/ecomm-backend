@@ -2,7 +2,7 @@ server:
   port: 8088
 spring:
   application:
-    name: order
+    name: orderservice
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost:5432}/mars
     username: ${DB_USER:postgres}
@@ -10,14 +10,14 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     properties:
       dialect: org.hibernate.dialect.PostgreSQLDialect
   #profiles:
    # active: "prod"
-  #config:
-   # import: "optional:configserver:http://localhost:8888/"
+  config:
+    import: "optional:configserver:http://localhost:8888/"
 #spring.jpa.properties.hibernate.jdbc.time_zone= Asia/Kolkata
 
 management:

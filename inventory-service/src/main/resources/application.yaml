@@ -6,7 +6,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/aqua
     username: postgres
-    password: root
+    password: mayur
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -25,3 +25,4 @@ management:
     web:
       exposure:
         include: "*"
+

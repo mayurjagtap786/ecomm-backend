@@ -7,8 +7,9 @@ public class Inventory{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(unique = true)
+
     private Long productId;
+
     private Integer availableQty;
     private Integer reservedQty;
     @Version

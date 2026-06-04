@@ -1,5 +1,6 @@
 package org.shopping.kart.inventory.service;
 
+import jakarta.transaction.Transactional;
 import org.shopping.kart.inventory.dto.InventoryRequest;
 import org.shopping.kart.inventory.exception.InsufficientStockException;
 import org.shopping.kart.inventory.exception.InventoryNotFound;
@@ -38,15 +39,18 @@ public class InventoryService {
         return inventory.getAvailableQty() >= quantity;
     }
 
-
+        @Transactional
         public void reservedStock(InventoryRequest request){
             Inventory inventory = getInventory(request.productId());
-            if(inventory.getAvailableQty() < request.quantity()){
+            int availableQty = inventory.getAvailableQty();;
+            int requestQty = request.quantity();
+            if(availableQty < requestQty){
                 throw new InsufficientStockException(request.productId());
             }
-            inventory.setAvailableQty(inventory.getAvailableQty() - request.quantity());
-            inventory.setReservedQty(request.quantity());
-            repository.save(inventory);
+            inventory.setAvailableQty(availableQty - requestQty);
+            inventory.setReservedQty(inventory.getReservedQty() + requestQty);
+
+            //repository.save(inventory);
         }
 
 

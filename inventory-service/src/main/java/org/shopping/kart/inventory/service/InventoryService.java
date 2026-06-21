@@ -39,7 +39,7 @@ public class InventoryService {
         return inventory.getAvailableQty() >= quantity;
     }
 
-        @Transactional
+       // @Transactional
         public void reservedStock(InventoryRequest request){
             Inventory inventory = getInventory(request.productId());
             int availableQty = inventory.getAvailableQty();;
@@ -50,7 +50,7 @@ public class InventoryService {
             inventory.setAvailableQty(availableQty - requestQty);
             inventory.setReservedQty(inventory.getReservedQty() + requestQty);
 
-            //repository.save(inventory);
+            repository.save(inventory);
         }
 
 

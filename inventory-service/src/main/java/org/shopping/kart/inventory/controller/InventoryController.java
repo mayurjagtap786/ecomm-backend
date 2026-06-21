@@ -6,6 +6,8 @@ import org.shopping.kart.inventory.dto.InventoryContactInfoDTO;
 import org.shopping.kart.inventory.dto.InventoryRequest;
 import org.shopping.kart.inventory.model.Inventory;
 import org.shopping.kart.inventory.service.InventoryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/inventory")
 public class InventoryController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
     @Autowired
     private InventoryService inventoryService;
     @Autowired
@@ -47,7 +50,8 @@ public class InventoryController {
     }
 
     @PostMapping("/reserve")
-    public ResponseEntity<Object> reserveInventory(@RequestBody InventoryRequest inventoryRequest){
+    public ResponseEntity<Object> reserveInventory(@RequestHeader("ecomm-correlation-id") String correlationId,@RequestBody InventoryRequest inventoryRequest){
+        LOG.debug("ecomm-services correlation-id found {}",correlationId);
         inventoryService.reservedStock(inventoryRequest);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Stock Reserved from environment "+environment.getProperty("server.port"));
     }

@@ -30,11 +30,9 @@ info:
     name: "gatewayserver"
     description: "Gateway server of Ecomm Application"
     version: "V1.0"
-#spring.profiles.active=dev
 
-#spring.config.import=optional:configserver:http://localhost:8888
-#spring.cloud.config.discovery.enabled=true
-#spring.cloud.config.discovery.service-id=api-gateway
-#spring.cloud.gateway.server.webflux.discovery.locator.enabled=true
-#spring.cloud.gateway.server.webflux.discovery.locator.lower-case-service-id=true
+logging:
+  level:
+    org:
+      shopping_kart: DEBUG
 

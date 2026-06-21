@@ -44,7 +44,7 @@ public class OrderService {
     /* If Order is created then order quantity will be deducted from inventory available_quantity
             and deducted inventory will be stored to reserved_quantity
     */
-    public ResponseEntity<?> createOrder(OrderRecord orderdRecord){
+    public ResponseEntity<?> createOrder(OrderRecord orderdRecord,String correlationId){
         Order order = OrderMapper.orderRecordToOrderEntity(orderdRecord, new Order());
         orderRepository.save(order);
         //call the inventory-service reserved
@@ -52,7 +52,7 @@ public class OrderService {
         inventoryRequest.put("productId", order.getProductId());
         inventoryRequest.put("quantity",order.getQuantity());
         //String response =  restTemplate.postForObject(INVENTORY_SERVICE.concat("/add"),inventoryRequest, String.class);
-         ResponseEntity<String>response = inventoryServiceProxy.reserveInventory(inventoryRequest);
+         ResponseEntity<String>response = inventoryServiceProxy.reserveInventory(correlationId,inventoryRequest);
         System.out.println("Inventory Service Response while creating order :"+response.getBody());
         return ResponseEntity.ok(response);
     }

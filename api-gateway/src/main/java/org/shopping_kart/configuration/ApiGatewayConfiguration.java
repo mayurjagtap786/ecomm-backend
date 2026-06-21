@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import java.time.LocalDateTime;
 import java.util.function.Function;
 
-@Configuration
+
 public class ApiGatewayConfiguration {
 
 

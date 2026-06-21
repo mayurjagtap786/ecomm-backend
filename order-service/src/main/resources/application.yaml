@@ -42,3 +42,9 @@ info:
     name: "orderservice"
     description: "This is the order service of Ecomm Application"
     Version: "V1.0"
+    
+logging:
+  level:
+    com:
+      example:
+        order: DEBUG

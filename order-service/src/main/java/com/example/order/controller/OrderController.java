@@ -7,6 +7,8 @@ import com.example.order.dto.OrderServiceContactInfo;
 import com.example.order.dto.ResponseDTO;
 import com.example.order.entity.Order;
 import com.example.order.serivce.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -21,6 +23,7 @@ import java.util.List;
 @RequestMapping("/order")
 public class OrderController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
 
     public OrderService orderService;
 
@@ -44,9 +47,11 @@ public class OrderController {
     public List<OrderDTO> getAllOrders(){
         return orderService.getAllOrders();
     }
-    @PostMapping
-    public ResponseEntity<?>createOrder(@RequestBody OrderRecord orderRecord){
-       ResponseEntity<?> response =  orderService.createOrder(orderRecord);
+
+    @PostMapping("/create")
+    public ResponseEntity<?>createOrder(@RequestHeader("ecomm-correlation-id") String correlationId,@RequestBody OrderRecord orderRecord){
+        LOG.debug("ecomm-services correlation-id found {}",correlationId);
+       ResponseEntity<?> response =  orderService.createOrder(orderRecord,correlationId);
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(

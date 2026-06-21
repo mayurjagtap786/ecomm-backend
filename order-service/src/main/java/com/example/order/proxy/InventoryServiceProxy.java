@@ -4,6 +4,7 @@ import com.example.order.config.FeignClientConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import java.util.Map;
 public interface InventoryServiceProxy {
 
     @PostMapping("/inventory/reserve")
-    public ResponseEntity<String> reserveInventory(Map<String,Object> inventoryMap);
+    public ResponseEntity<String> reserveInventory(@RequestHeader("ecomm-correlation-id") String correlationId,Map<String, Object> inventoryMap);
 
     @PostMapping("/inventory/confirm")
     public ResponseEntity<String> confirmInventory(Map<String,Object> inventoryMap);
